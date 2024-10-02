@@ -15,7 +15,7 @@ const App = () => {
     // Тут використовуй сеттер, щоб оновити стан
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
   };
-  const totalFeedback = good + neutral + bad;
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
 
   return (
     <>
