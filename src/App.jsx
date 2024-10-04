@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 import Description from "./components/Description/Description";
 import Feedback from "./components/Feedback/Feedback";
 import Options from "./components/Options/Options";
+import Notification from "./components/Notification/Notification";
 
 const App = () => {
   const [feedback, setFeedback] = useState({
@@ -14,16 +15,24 @@ const App = () => {
   const updateFeedback = (feedbackType) => {
     // Тут використовуй сеттер, щоб оновити стан
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
+    feedbackType === "reset" && setRating({ ...initialRating });
   };
-  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
-
+  const totalFeedbacks = feedback.good + feedback.neutral + feedback.bad;
+  const goodFeedbacks = Math.round((feedback.good / totalFeedbacks) * 100);
   return (
-    <>
+    <div>
       <Description />
-      <Options updateFeedback={updateFeedback} />
-      <Feedback />
-    </>
+      <Options updateFeedback={updateFeedback} totalFeedback={totalFeedbacks} />
+      {totalFeedbacks > 0 ? (
+        <Feedback
+          feedbacks={feedback}
+          totalFeedbacks={totalFeedbacks}
+          goodFeedbacks={goodFeedbacks}
+        ></Feedback>
+      ) : (
+        <Notification></Notification>
+      )}
+    </div>
   );
 };
-
 export default App;
