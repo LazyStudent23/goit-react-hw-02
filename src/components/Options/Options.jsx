@@ -1,6 +1,6 @@
 import styles from "./Options.module.css";
 
-const Options = ({ updateFeedback, totalFeedbacks }) => {
+const Options = ({ updateFeedback, totalFeedback }) => {
   return (
     <div>
       <button onClick={() => updateFeedback("good")} type="button">
@@ -12,7 +12,7 @@ const Options = ({ updateFeedback, totalFeedbacks }) => {
       <button onClick={() => updateFeedback("bad")} type="button">
         Bad
       </button>
-      {totalFeedbacks > 0 || (
+      {totalFeedback > 0 && (
         <button type="button" onClick={() => updateFeedback("reset")}>
           Reset
         </button>
