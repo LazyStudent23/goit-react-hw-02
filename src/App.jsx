@@ -7,11 +7,18 @@ import Options from "./components/Options/Options";
 import Notification from "./components/Notification/Notification";
 
 const App = () => {
-  const [feedback, setFeedback] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
+  const initialFeedback = { good: 0, neutral: 0, bad: 0 };
+  const [feedback, setFeedback] = useState(() => {
+    const feedbackFromLS = JSON.parse(
+      window.localStorage.getItem("ls-feedback")
+    );
+    return feedbackFromLS ?? initialFeedback;
   });
+
+  useEffect(() => {
+    window.localStorage.setItem("ls-feedback", JSON.stringify(feedback));
+  }, [feedback]);
+
   const updateFeedback = (feedbackType) => {
     // Тут використовуй сеттер, щоб оновити стан
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
