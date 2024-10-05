@@ -22,7 +22,7 @@ const App = () => {
   const updateFeedback = (feedbackType) => {
     // Тут використовуй сеттер, щоб оновити стан
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
-    feedbackType === "reset" && setRating({ ...initialRating });
+    feedbackType === "reset" && setFeedback({ ...initialFeedback });
   };
   const totalFeedbacks = feedback.good + feedback.neutral + feedback.bad;
   const goodFeedbacks = Math.round((feedback.good / totalFeedbacks) * 100);
