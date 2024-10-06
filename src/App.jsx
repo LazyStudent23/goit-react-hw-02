@@ -22,6 +22,8 @@ const App = () => {
   const updateFeedback = (feedbackType) => {
     // Тут використовуй сеттер, щоб оновити стан
     setFeedback({ ...feedback, [feedbackType]: feedback[feedbackType] + 1 });
+  };
+  const resetFeedback = (feedbackType) => {
     feedbackType === "reset" && setFeedback({ ...initialFeedback });
   };
   const totalFeedbacks = feedback.good + feedback.neutral + feedback.bad;
@@ -29,7 +31,11 @@ const App = () => {
   return (
     <div>
       <Description />
-      <Options updateFeedback={updateFeedback} totalFeedback={totalFeedbacks} />
+      <Options
+        updateFeedback={updateFeedback}
+        totalFeedback={totalFeedbacks}
+        resetFeedback={resetFeedback}
+      />
       {totalFeedbacks > 0 ? (
         <Feedback
           feedbacks={feedback}
